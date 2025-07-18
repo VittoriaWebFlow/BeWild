@@ -11,8 +11,11 @@ public class Esperienza {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     private String titolo;
     private String descrizione;
+    @Column(columnDefinition = "TEXT")
+    private String descrizioneEstesa;
     private String localita;
     private String livelloAdrenalina;
     private int durata;

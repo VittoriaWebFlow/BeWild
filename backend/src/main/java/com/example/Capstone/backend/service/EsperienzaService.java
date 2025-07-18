@@ -28,6 +28,7 @@ public class EsperienzaService {
         Esperienza esperienza = new Esperienza();
         esperienza.setTitolo(dto.getTitolo());
         esperienza.setDescrizione(dto.getDescrizione());
+        esperienza.setDescrizioneEstesa(dto.getDescrizioneEstesa());
         esperienza.setLocalita(dto.getLocalita());
         esperienza.setLivelloAdrenalina(dto.getLivelloAdrenalina());
         esperienza.setDurata(dto.getDurata());
@@ -62,6 +63,7 @@ public class EsperienzaService {
 
         esperienza.setTitolo(dto.getTitolo());
         esperienza.setDescrizione(dto.getDescrizione());
+        esperienza.setDescrizioneEstesa(dto.getDescrizioneEstesa());
         esperienza.setLocalita(dto.getLocalita());
         esperienza.setLivelloAdrenalina(dto.getLivelloAdrenalina());
         esperienza.setDurata(dto.getDurata());

@@ -18,6 +18,7 @@ public class EsperienzaDTO {
     private String titolo;
     @NotBlank(message = "La descrizione è obbligatoria")
     private String descrizione;
+    private String descrizioneEstesa;
     @NotBlank(message = "La località è obbligatoria")
     private String localita;
     @NotBlank(message = "Il livello di adrenalina è obbligatoria")
