@@ -21,9 +21,13 @@ public class EsperienzaService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
+    @Autowired
+    private GeocodingService geocodingService;
+
     public Esperienza create(EsperienzaDTO dto) throws NotFoundException{
         Categoria categoria= categoriaRepository.findById(dto.getCategoriaId())
                 .orElseThrow(() -> new NotFoundException("La categoria non è stata trovata"));
+
 
         Esperienza esperienza = new Esperienza();
         esperienza.setTitolo(dto.getTitolo());
@@ -36,10 +40,14 @@ public class EsperienzaService {
         esperienza.setImmagine(dto.getImmagine());
         esperienza.setCategoria(categoria);
 
+        double[] coordinate = geocodingService.getCoordinates(dto.getLocalita());
+        esperienza.setLatitudine(coordinate[0]);
+        esperienza.setLongitudine(coordinate[1]);
+
         return esperienzaRepository.save(esperienza);
     }
 
-    //Mi serve per mostrare tutte le mie esperienze
+
     public List<Esperienza> getAll(){
         return esperienzaRepository.findAll();
     }
@@ -56,10 +64,10 @@ public class EsperienzaService {
         esperienzaRepository.delete(esperienza);
     }
 
-    public Esperienza updateEsperienza(Long id, EsperienzaDTO dto) throws NotFoundException{
-        Esperienza esperienza= getById(id);
-        Categoria categoria= categoriaRepository.findById(dto.getCategoriaId()).
-                orElseThrow(() -> new NotFoundException("La categoria non è stata trovata"));
+    public Esperienza updateEsperienza(Long id, EsperienzaDTO dto) throws NotFoundException {
+        Esperienza esperienza = getById(id);
+        Categoria categoria = categoriaRepository.findById(dto.getCategoriaId())
+                .orElseThrow(() -> new NotFoundException("La categoria non è stata trovata"));
 
         esperienza.setTitolo(dto.getTitolo());
         esperienza.setDescrizione(dto.getDescrizione());
@@ -71,8 +79,14 @@ public class EsperienzaService {
         esperienza.setImmagine(dto.getImmagine());
         esperienza.setCategoria(categoria);
 
+
+        double[] coordinate = geocodingService.getCoordinates(dto.getLocalita());
+        esperienza.setLatitudine(coordinate[0]);
+        esperienza.setLongitudine(coordinate[1]);
+
         return esperienzaRepository.save(esperienza);
     }
+
     public List<Esperienza> getByLocalita(String localita) {
         return esperienzaRepository.findByLocalitaIgnoreCase(localita);
     }

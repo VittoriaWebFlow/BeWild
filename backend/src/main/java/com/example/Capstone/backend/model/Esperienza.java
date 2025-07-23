@@ -22,6 +22,12 @@ public class Esperienza {
     private double prezzo;
     private String immagine;
 
+    @Column
+    private Double latitudine;
+
+    @Column
+    private Double longitudine;
+
     @ManyToOne
     private Categoria categoria;
 
